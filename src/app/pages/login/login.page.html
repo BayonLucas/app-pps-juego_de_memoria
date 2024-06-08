@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title size="large">Tabla</ion-title>
+    <ion-title size="large">Didactica</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col size="12" class="title">
+      <div>
+        <ion-title size="large">Juego de</ion-title>
+        <ion-title size="large">memoria</ion-title>
+      </div>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row >
+    <ion-col size="12" style="display: flex;" class="ion-justify-content-center"> 
+      <ion-img class="btn-img" src="../../../assets/botones/casco.gif" (click)="cargarUsuario('admin')"></ion-img>
+      <ion-img class="btn-img" src="../../../assets/botones/mision.gif" (click)="cargarUsuario('tester')"></ion-img>
+      <ion-img class="btn-img" src="../../../assets/botones/usuario.gif" (click)="cargarUsuario('usuario')"></ion-img>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center ">
+    <ion-button *ngIf="!form.valid" class="btn-ingresar">
+      <ion-img src="../../../assets/botones/rompecabezas.png" class="btn-img"></ion-img>
+    </ion-button>
+    <ion-button *ngIf="form.valid" class="btn-ingresar">
+      <ion-img src="../../../assets/botones/problema-resuelto.png" class="btn-img" (click)="ingresar()"></ion-img>
+    </ion-button>
+  </ion-row>
+
+  <ion-row>
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="ingresar()">
+      <ion-row class="ion-justify-content-center slot aux">
+        <div style="background-color: #1296e271; width: 100%; border-radius: 15px;">
+
+          <ion-col size="12" sizeLg="12" sizeSm="6" class="subslot">
+              <ion-item class="custom-input" lines="none">
+                <ion-input 
+                  type="email" 
+                  autocomplete="email" 
+                  label="Correo" 
+                  formControlName='email' 
+                  labelPlacement="floating">
+                </ion-input>
+              </ion-item>
+              <div class="error" *ngIf="form.controls?.['email']?.invalid && (form.controls?.['email']?.dirty || form.controls?.['email']?.touched)">
+                <div *ngIf="form.controls?.['email']?.errors?.['required']">El correo es requerido</div>
+                <div *ngIf="form.controls?.['email']?.errors?.['email']">El correo es inválido</div>
+              </div>  
+          </ion-col>  
+  
+          <ion-col size="12" sizeLg="12" sizeSm="6" class="subslot">
+              <ion-item class="custom-input" lines="none">
+                <ion-input 
+                  type="password" 
+                  autocomplete="password" 
+                  label="Contraseña" 
+                  formControlName='password' 
+                  labelPlacement="floating">
+                </ion-input>
+              </ion-item>
+              <div class="error" *ngIf="form.controls?.['password']?.invalid && (form.controls?.['password']?.dirty || form.controls?.['password']?.touched)">
+                <div *ngIf="form.controls?.['password']?.errors?.['minlength']">La contraseña debe tener mínimo 6 caracteres</div>
+                <div *ngIf="form.controls?.['password']?.errors?.['required']">La contraseña es requerida</div>
+              </div>
+          </ion-col>
+        </div>
+      </ion-row>  
+    </form>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-footer>
